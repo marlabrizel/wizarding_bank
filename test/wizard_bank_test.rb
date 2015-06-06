@@ -1,5 +1,6 @@
 require "minitest/autorun"
 require "minitest/pride"
+require "../lib/wizard_bank"
 # Under this line, I want you to require the file that you will be writing
 # all of your code in using either require or require_relative.
 # The file should reside in the lib directory. Figure out how how file
@@ -15,13 +16,12 @@ class WizardBankTest < Minitest::Test
   end
 
   def test_a_person_can_have_a_different_name
-    skip
-    # Write a test that checks to see if a person can have a different
-    # name
+    person = Person.new("Hermione")
+
+    assert_equal "Hermione", person.name
   end
 
   def test_a_person_can_have_cash
-    skip
     person = Person.new("Dumbledore", 1000)
 
     assert_equal 1000, person.cash
@@ -29,21 +29,23 @@ class WizardBankTest < Minitest::Test
 
   def test_a_person_cannot_be_created_with_negative_cash
     skip
+    person = Person.new("Hagrid", -100)
+
+    assert_equal 0, person.cash
     # If someone tries to create a person with negative cash, make their
     # cash level zero and write the test for it. Sad path tests, yo.
   end
 
   def test_a_person_has_0_cash_by_default
-    skip
     person = Person.new("Ron")
 
     assert_equal 0, person.cash
   end
 
   def test_a_persons_cash_can_be_set_on_creation
-    skip
-    # Write a test that creates a person with 750 in cash and verifies
-    # that they have that much cash.
+    person = Person.new("Hermione", 750)
+
+    assert_equal 750, person.cash
   end
 
   def test_a_bank_can_be_created_with_a_name
